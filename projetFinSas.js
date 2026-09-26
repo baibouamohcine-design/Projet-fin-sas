@@ -15,7 +15,6 @@ while(true){
     if( choix === 1 ){
         console.log(' ===  Ajouter un Nouveau Candidat  === ')
         ajouterNouveauCandidat()
-        
     }else if( choix === 2 ){
         console.log(' ===  Ajouter Plusieurs Candidats à La Fois  === ')
         ajouterplusieurscandidat()
@@ -37,40 +36,41 @@ while(true){
             console.log(' ----  Filtrer et afficher uniquement les candidats d un parti politique spécifique  ---- ')
             filtrerpartiPolitiqueSpécifique()
         }else{console.log("Votre Choix Ne Corespondant pas Avec Menu")}
-        
     }else if(choix === 4 ){
         console.log('    ===  Voter Pour un Candidat  === ')
         console.log(`---- Saisissez les Données Suivante ----`)
         voterPourCandidat()
     }else if (choix === 5 ){
-        console.log(" ===  Modifier les Informations d'un Candidat  === ")
-        console.log("1 - Modifier le parti politique d'un candidat.")
-        console.log("2 - Modifier l'âge d'un candidat.")
+        console.log(" -----  Modifier les Informations d'un Candidat  ---- ")
+        modifierCandida()
+    }else if(choix === 6 ){
+        console.log(" -----  Supprimer un candidat  ----- ")
+        suprimerCondidate()
+    }else if (choix === 7 ){
+        console.log(" -----  Rechercher des candidats  ----- ")
+        rechercherDesCandidat()
+    }else if ( choix === 8 ){
+        console.log("                  ===  Statistiques de l'élection  === ")
+        console.log('1 - Afficher le nombre total de candidats.')
+        console.log("2 - Afficher le nombre total de votes exprimés dans toute l'élection.")
+        console.log('3 - Afficher le Top 3 des candidats ayant le plus de votes')
+        console.log('4 - Afficher le nombre de candidats par parti politique.')
         const choix = Number(prompt(" Entré Votre Choix : "))
-        if( choix === 1 ){
-            console.log('    ----  Modifier les Informations d un Candidat ---- ')
-        }
-        else if(choix === 2){
-            console.log('    ----  Modifier l âge d un candidat ---- ')
+        if(choix === 1 ){
+            console.log(" -----  Nombre Total des Candidats  ----- ")
+            nombreTotallCondidat()
+        }else if(choix === 2){
+            console.log("   ----- Nombre Total des Votes ----- ")
+        }else if(choix === 3){
+
+        }else if(choix === 4){
 
         }else{console.log("Votre Choix Ne Corespondant pas Avec Menu")}
-    }else if(choix === 6 ){
-        console.log(" ===  Supprimer un candidat  === ")
-
-    }else if (choix === 7 ){
-        console.log(" ===  Rechercher des candidats  === ")
-
-    }else if ( choix === 8 ){
-        console.log(" ===  Statistiques de l'élection  === ")
-
     }else if(choix === 0 ){
         console.log(" ===  A Bientôt  === ")
         break 
     }else{console.log("Votre Choix Ne Corespondant pas Avec Menu")}
 }
-
-
-
 function ajouterNouveauCandidat(){
    let question1 =prompt("Entré votre CIN : ")
     for(let i = 0 ; i < condidate.length ; i++){
@@ -91,21 +91,13 @@ function ajouterNouveauCandidat(){
         }
         condidate.push(obj)
 }
-    
-    
-    
-
 function ajouterplusieurscandidat(){
     let plusieursCandidat=Number(prompt(" Combien y a-t-il de Condidats : "))
     for(let i = 0 ; i < plusieursCandidat ;i++ ){
         console.log(`Èntrer les information de condidate ${i+1}`)
         ajouterNouveauCandidat()
     }
-
 }
-
-
-
 function afficherCandidats(){
     for(let i = 0;i<condidate.length ;i++){
        console.log(`CIN : ${condidate[i].cin}
@@ -116,8 +108,6 @@ function afficherCandidats(){
         `)
     }
 }
-
-
 function trierLesCandidats(){
   for(let i = 0 ; i<condidate.length;i++){
     for(let j = 0 ; j < condidate.length-1;j++){
@@ -129,23 +119,25 @@ function trierLesCandidats(){
     }
   } 
 }
-
-
-
-
 function filtrerpartiPolitiqueSpécifique(){ 
-    let stock = ""
-    const serch = string(prompt("Saisissez le Nom du Parti que Vous Recherchez : "))
-    for(let i = 0 ; i < condidate.length ;i++){
-        if( condidate[i].partiPolitique == serch ){
-            stock+=condidate[i]
+    let nomDuParti = prompt("Entrer Le Nom de Parti pour  Filtrer et afficher uniquement les candidats d'un parti politique spécifique : ")
+    let verifie = false
+    for(let i = 0 ; i < condidate.length ; i++){
+        if(nomDuParti === condidate[i].partiPolitique){
+            verifie = true
+            console.log("Parti Exist dans  Listes des  Campagne électorale : ")
+            console.log(`CIN : ${condidate[i].cin}
+                  Nom Compléte : ${condidate[i].nomComplete} 
+                  Parti Politique : ${condidate[i].partiPolitique}
+                  Age : ${condidate[i].age}  
+                  Effecteurs : ${condidate[i].electeurs.length}
+               `)
         }
     }
-    return stock
+    if(verifie === false){
+        console.log(" Parti N'exist pas dans  Listes des  Campagne électorale")
+    }
 }
-
-
-
 function voterPourCandidat(){
     let verifie = false
     let cinElecteurVoter =prompt("Entré votre CIN : ")
@@ -166,6 +158,84 @@ function voterPourCandidat(){
         }
     }
     }
+}
+function modifierCandida(){
+    let  verifierCin = prompt("Saisissez le cin du Condidat que Vous Recherchez afin de Modifié  la Parti : ")
+    let verifie = false
+    for (let i = 0 ; i < condidate.length ; i++ ){
+       if(verifierCin === condidate[i].cin ){
+        verifie = true
+        console.log("1 - Modifier le parti politique d'un candidat.  ")
+        console.log("2 - Modifier l'âge d'un candidat.  ")
+        let choix = Number(prompt("Entrer Votre Choix : "))
+        if (choix === 1 ){
+            let X = true
+                let nouvellecandida = prompt("La Nouvelle Politique Nom : ")
+                for (let j = 0; j < condidate.length; j++) {
+                    if (condidate[j].partiPolitique === nouvellecandida) {
+                        X = false
+                        console.log("Cette  Parti Politique Nom  Déjà Utilisé")
+                    }
+                }
+                if( X === true){
+                    condidate[i].partiPolitique = nouvellecandida
+                }
+        }else if(choix === 2){
+            let agecandida =Number(prompt("Entrer Nouveau age  : "))
+            if (agecandida > 0) {
+                    condidate[i].age = agecandida
+                } else {
+                    console.log("Age non Valid ")
+                }
+        }else {
+                console.log("---- Votre Choix Ne Corespondant pas Avec Menu ----- ")
+            }
+    }
+}if (verifie === false) {
+        console.log("Nous n'avons pas trouvé ce filtre, veuillez saisir un filtre valide.")
+    }
+}
+function suprimerCondidate(){
+        let cinCondidat = prompt("saisissez la CIN de candidat Pour Suprimer : ");
+        let index= -1
+        for (let i = 0 ; i < condidate.length ; i++){
+            if (cinCondidat === condidate[i].cin){
+               index = i
+            }
+        }
+        if (index === -1){
+            console.log("Ce candidat n'existe pas ")
+        }
+        else{
+                condidate.splice(index);
+        console.log("Supprimé avec succès")
+    }
+}
+function rechercherDesCandidat(){
+    let nomCondidat = prompt("Entrer Le Nom Complet de Candidat Afin de Trouver la Condidat par son Nom : ")
+    let verifie = false
+    for(let i = 0 ; i < condidate.length ; i++){
+        if(nomCondidat === condidate[i].nomComplete){
+            verifie = true
+            console.log("Condidat Exist  dans les Listes des  Campagne électorale ")
+            console.log(`CIN : ${condidate[i].cin}
+                  Nom Compléte : ${condidate[i].nomComplete} 
+                  Parti Politique : ${condidate[i].partiPolitique}
+                  Age : ${condidate[i].age}  
+                  Effecteurs : ${condidate[i].electeurs.length}
+               `)
+        }
+    }
+    if(verifie === false){
+        console.log(" Condidat N'exist pas dans les Listes des  Campagne électorale ")
+    }
+}
+function nombreTotallCondidat(){
+    let some = 0
+    for(let i = 0 ;i < condidate.length; i++){
+        some ++
+    }
+    console.log( `La Some Total Du Condidates est :${some}`)
 }
 
 
