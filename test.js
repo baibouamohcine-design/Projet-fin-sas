@@ -50,22 +50,29 @@ const condidate = [
     electeurs: [ 'OP233067' ]
   },
 ]
-function  nombreCandidatsParParti(){
-    let obj = {}
-     for(let i = 0 ; i < condidate.length ;i++){
-      if(obj[condidate[i].partiPolitique]=== undefined ) {
-        obj[condidate[i].partiPolitique] = 1
-      } else{
-        obj[condidate[i].partiPolitique]+=1
-    
-      }
-    }
-    for(key in obj){
-       console.log(`${key}   ${obj[key]}`) 
+function voterPourCandidat() {
+    let verifie = false
+    let cine = prompt("Entré votre CIN : ")
+    for (let i = 0; i < condidate.length; i++) {
+        for (let j = 0; j < condidate[i].electeurs.length; j++)
+            if (condidate[i].electeurs[j] === cine) {
+                console.log("Vous avez déjà voté etvous n'avez pas le droit de modifier votre vote ni de voter à nouveau")
+                verifie = true
+                break
+            }
+        if (verifie == true) {
+            continue
+        } else {
+            let cinv = prompt("Entré votre CIN de la Cocndidate pour Voter  : ")
+            if (cinv === condidate[i].cin) {
+
+                condidate[i].electeurs.push(cine)
+            }
+        }
     }
 }
+voterPourCandidat(condidate)
 
-nombreCandidatsParParti(condidate)
 /*function topTrois(){
     let max1 = arr[0]
     let max2=arr[0]

@@ -198,21 +198,23 @@ function voterPourCandidat(){
     let verifie = false
     let cinElecteurVoter =prompt("Entré votre CIN : ")
     for(let i = 0; i<condidate.length;i++){
-        for(let j = 0 ;j <condidate[i].electeurs.length ;j++ )
-        if (condidate[i].electeurs[j] === cinElecteurVoter  ){
-            console.log("Vous avez déjà voté etvous n'avez pas le droit de modifier votre vote ni de voter à nouveau")
-            verifie =true
-            break
+        for(let j = 0 ;j <condidate[i].electeurs.length ;j++ ){
+           if (condidate[i].electeurs[j] === cinElecteurVoter  ){
+               console.log("Vous avez déjà voté etvous n'avez pas le droit de modifier votre vote ni de voter à nouveau")
+               verifie =true
+               break
+            }
         }
-        if(verifie == true){
-          continue
-        }else{
-         let cinVoterCandidat =prompt("Entré votre CIN de la Cocndidate pour Voter  : ")
+    if(verifie == true){
+          return;
+    }else{
+         let cinVoterCandidat = prompt("Entré votre CIN de la Cocndidate pour Voter  : ")
           if(cinVoterCandidat === condidate[i].cin ){
 
-            condidate[i].electeurs.push(cinElecteurVoter)
+                condidate[i].electeurs.push(cinElecteurVoter)
+                return
+          }
         }
-    }
     }
 }
 function modifierCandida(){
@@ -227,18 +229,19 @@ function modifierCandida(){
         if (choix === 1 ){
             let X = true
                 let nouvellecandida = prompt("La Nouvelle Politique Nom : ")
-                for (let j = 0; j < condidate.length; j++) {
+                for (let j = 0; j < condidate.length; j++){
                     if (condidate[j].partiPolitique === nouvellecandida) {
                         X = false
                         console.log("Cette  Parti Politique Nom  Déjà Utilisé")
                     }
                 }
                 if( X === true){
+                    console.log("good")
                     condidate[i].partiPolitique = nouvellecandida
                 }
         }else if(choix === 2){
-            let agecandida =Number(prompt("Entrer Nouveau age  : "))
-            if (agecandida > 0) {
+            let agecandida = (prompt("Entrer Nouveau age  : "))
+            if (agecandida > 0){
                     condidate[i].age = agecandida
                 } else {
                     console.log("Age non Valid ")
