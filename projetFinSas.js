@@ -1,5 +1,20 @@
 const prompt = require("prompt-sync")();
-const condidate = []
+const condidate = [
+    {
+    cin: 'XY654321',
+    nomComplete: 'Alaoui Yassine',
+    partiPolitique: 'Parti du Progrès',
+    age: 35,
+    electeurs:  [ 'ST678901', 'UV123456', 'WX789012', 'YZ345678' ]
+  },
+  {
+    cin: 'AB123456',
+    nomComplete: 'Boushaba Soufiane',
+    partiPolitique: 'Indépendant',
+    age: 40,
+    electeurs: [ 'OP234567' ]
+  },
+]
 while(true){
     console.log('-----------------  Menu  -------------------- ')
     console.log(' 1. Ajouter un nouveau candidat  ' )
@@ -61,10 +76,13 @@ while(true){
             nombreTotallCondidat()
         }else if(choix === 2){
             console.log("   ----- Nombre Total des Votes ----- ")
+            nombreTotallelec()
         }else if(choix === 3){
-
+            console.log("   ----- Top 3 des candidats ayant le plus de votes ----- ")
+            topTrois()
         }else if(choix === 4){
-
+            console.log("   ----- Le Nombre de Candidats par Parti Politique ----- ")
+            
         }else{console.log("Votre Choix Ne Corespondant pas Avec Menu")}
     }else if(choix === 0 ){
         console.log(" ===  A Bientôt  === ")
@@ -82,6 +100,11 @@ function ajouterNouveauCandidat(){
     let question2 =prompt("Entré votre Nom Compléte : ")
     let question3 =prompt("Entré votre Parti Poltique : ")
     let question4 =Number(prompt("Entré votre Age : "))
+    if(question4 >= 18){
+        console.log("L'age est Validéé ")
+    }else{
+       console.log("L'age est Non  Valide ") 
+    }
     let obj = {
         cin : question1,
         nomComplete : question2,
@@ -94,7 +117,7 @@ function ajouterNouveauCandidat(){
 function ajouterplusieurscandidat(){
     let plusieursCandidat=Number(prompt(" Combien y a-t-il de Condidats : "))
     for(let i = 0 ; i < plusieursCandidat ;i++ ){
-        console.log(`Èntrer les information de condidate ${i+1}`)
+        console.log(` Entrer les information de condidate ${i+1}`)
         ajouterNouveauCandidat()
     }
 }
@@ -237,5 +260,25 @@ function nombreTotallCondidat(){
     }
     console.log( `La Some Total Du Condidates est :${some}`)
 }
-
-
+function nombreTotallelec(){
+    let totalVotes = 0
+    for(let i = 0 ;i < condidate.length; i++){
+        for(let j = 0 ; j < condidate[i].electeurs.length; j++ )
+        totalVotes ++
+    }
+    console.log( `Nombre Total des Votes est :${totalVotes}`)
+}
+function topTrois(){
+  for(let i = 0 ; i<condidate.length;i++){
+    for(let j = 0 ; j < condidate.length-1;j++){
+        if (condidate[j].electeurs.length < condidate[j+1].electeurs.length){
+        let resultat = condidate[j+1]
+        condidate[j+1]= condidate[j]
+         condidate[j] = resultat
+        }
+    }
+  } 
+  for(let i = 0 ; i < 3 ; i++){
+    console.log(condidate[i])
+  }
+}

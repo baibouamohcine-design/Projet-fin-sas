@@ -29,15 +29,37 @@ const arr = [
     age: 29,
     electeurs: [ 'CD987654', 'EF456789' ]}
 ]
-function nombreTotallelecteurs(){
-    let some = 0
-    for(let i = 0 ;i < arr.length; i++){
-        for(let j = 0 ; arr[i].electeurs.length ; j++)
-        some ++
+function  nombreCandidatsParParti(){
+  for(let i = 0 ; i<arr.length;i++){
+    for(let j = 0 ; j < arr.length-1;j++){
+        if (arr[j].electeurs.length < arr[j+1].electeurs.length){
+        let resultat = arr[j+1]
+        arr[j+1]= arr[j]
+         arr[j] = resultat
+        }
     }
-    console.log( `La Some Total Du Electeurs est :${some}`)
+  } 
+  for(let i = 0 ; i < 3 ; i++){
+    console.log(arr[i])
+  }
 }
-nombreTotallelecteurs(arr)
+nombreCandidatsParParti(arr)
+/*function topTrois(){
+    let max1 = arr[0]
+    let max2=arr[0]
+    let max3=arr[0]
+    for(let i = 0 ;i < arr.length; i++){
+        for(let j = 0 ; j < arr[i].electeurs.length; j++ ){
+            if( arr[i].electeurs[j] > max1 ){
+                   max1 = arr[i].electeurs[j]
+                }
+        }
+             
+    }
+    console.log( `Nombre Total des Votes est :${max1}`)
+}
+
+
 /*function filtrerpartiPolitiqueSpécifique(){ 
     let nomDuParti = prompt("Entrer Le Nom de Parti pour  Filtrer et afficher uniquement les candidats d'un parti politique spécifique : ")
     let verifie = false
