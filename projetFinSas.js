@@ -1,18 +1,53 @@
 const prompt = require("prompt-sync")();
 const condidate = [
     {
+    cin: 'JC686720',
+    nomComplete : 'Mohcine Alaoui',
+    partiPolitique: 'Pam',
+    age: 34,
+    electeurs:[ 'GH123456', 'IJ789012', 'KL345678','HH869574', 'KL339678','HL869574' ]
+  },
+    {
+    cin: 'JC686721',
+    nomComplete : 'Mohcine Baiboua',
+    partiPolitique: 'Pdg',
+    age: 44,
+    electeurs:[ 'GH123456', 'IJ789012', 'KL345678','HH869574' ]
+  },
+    {
+    cin: 'QR345678',
+    nomComplete : 'El Amrani Omar',
+    partiPolitique: 'Pam',
+    age: 96,
+    electeurs:[ 'GH123456', 'IJ789012', 'KL345678' ]
+  },
+    {
     cin: 'XY654321',
     nomComplete: 'Alaoui Yassine',
-    partiPolitique: 'Parti du Progrès',
+    partiPolitique: 'Pdg',
     age: 35,
-    electeurs:  [ 'ST678901', 'UV123456', 'WX789012', 'YZ345678' ]
+    electeurs:  [ 'ST678901', 'UV123456', 'WX789012', 'YZ345678','AM868798' ]
   },
   {
     cin: 'AB123456',
     nomComplete: 'Boushaba Soufiane',
     partiPolitique: 'Indépendant',
     age: 40,
+    electeurs: [ 'OP234567','JC782539' ]
+  },
+  {
+    cin: 'JC123456',
+    nomComplete: 'Ahmadi  Soufiane',
+    partiPolitique: 'Indépendant',
+    age: 38,
     electeurs: [ 'OP234567' ]
+  },
+  {
+    cin: 'JC129356',
+    nomComplete: 'Ahmadi  Anas',
+    partiPolitique: 'Pdg',
+    age: 18,
+    electeurs: [ 'OP233067' ]
   },
 ]
 while(true){
@@ -82,7 +117,7 @@ while(true){
             topTrois()
         }else if(choix === 4){
             console.log("   ----- Le Nombre de Candidats par Parti Politique ----- ")
-            
+            nombreCandidatsParParti()
         }else{console.log("Votre Choix Ne Corespondant pas Avec Menu")}
     }else if(choix === 0 ){
         console.log(" ===  A Bientôt  === ")
@@ -99,11 +134,9 @@ function ajouterNouveauCandidat(){
 
     let question2 =prompt("Entré votre Nom Compléte : ")
     let question3 =prompt("Entré votre Parti Poltique : ")
-    let question4 =Number(prompt("Entré votre Age : "))
-    if(question4 >= 18){
-        console.log("L'age est Validéé ")
-    }else{
-       console.log("L'age est Non  Valide ") 
+    let question4 = 0
+    while(question4 < 18){
+        question4 =Number(prompt("Entré votre Age ( 18+ ) : "))
     }
     let obj = {
         cin : question1,
@@ -230,7 +263,7 @@ function suprimerCondidate(){
             console.log("Ce candidat n'existe pas ")
         }
         else{
-                condidate.splice(index);
+                condidate.splice(index,1);
         console.log("Supprimé avec succès")
     }
 }
@@ -258,7 +291,7 @@ function nombreTotallCondidat(){
     for(let i = 0 ;i < condidate.length; i++){
         some ++
     }
-    console.log( `La Some Total Du Condidates est :${some}`)
+    console.log( `La Some Total Du Condidates est : ${some}`)
 }
 function nombreTotallelec(){
     let totalVotes = 0
@@ -266,7 +299,7 @@ function nombreTotallelec(){
         for(let j = 0 ; j < condidate[i].electeurs.length; j++ )
         totalVotes ++
     }
-    console.log( `Nombre Total des Votes est :${totalVotes}`)
+    console.log( `Nombre Total des Votes est : ${totalVotes}`)
 }
 function topTrois(){
   for(let i = 0 ; i<condidate.length;i++){
@@ -281,4 +314,18 @@ function topTrois(){
   for(let i = 0 ; i < 3 ; i++){
     console.log(condidate[i])
   }
+}
+function  nombreCandidatsParParti(){
+    let obj = {}
+     for(let i = 0 ; i < condidate.length ;i++){
+      if(obj[condidate[i].partiPolitique]=== undefined ) {
+        obj[condidate[i].partiPolitique] = 1
+      } else{
+        obj[condidate[i].partiPolitique]+=1
+    
+      }
+    }
+    for(key in obj){
+       console.log(`${key}   ${obj[key]}`) 
+    }
 }

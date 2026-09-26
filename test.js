@@ -1,49 +1,71 @@
 const prompt = require("prompt-sync")();
-const arr = [
-  {
+const condidate = [
+    {
+    cin: 'JC686720',
+    nomComplete : 'Mohcine Alaoui',
+    partiPolitique: 'Pam',
+    age: 34,
+    electeurs:[ 'GH123456', 'IJ789012', 'KL345678','HH869574', 'KL339678','HL869574' ]
+  },
+    {
+    cin: 'JC686721',
+    nomComplete : 'Mohcine Baiboua',
+    partiPolitique: 'Pdg',
+    age: 44,
+    electeurs:[ 'GH123456', 'IJ789012', 'KL345678','HH869574' ]
+  },
+    {
     cin: 'QR345678',
     nomComplete : 'El Amrani Omar',
-    partiPolitique: 'xx',
-    age: 44,
+    partiPolitique: 'Pam',
+    age: 96,
     electeurs:[ 'GH123456', 'IJ789012', 'KL345678' ]
   },
-  {
+    {
     cin: 'XY654321',
     nomComplete: 'Alaoui Yassine',
-    partiPolitique: 'Parti du Progrès',
+    partiPolitique: 'Pdg',
     age: 35,
-    electeurs:  [ 'ST678901', 'UV123456', 'WX789012', 'YZ345678' ]
+    electeurs:  [ 'ST678901', 'UV123456', 'WX789012', 'YZ345678','AM868798' ]
   },
   {
     cin: 'AB123456',
     nomComplete: 'Boushaba Soufiane',
     partiPolitique: 'Indépendant',
     age: 40,
+    electeurs: [ 'OP234567','JC782539' ]
+  },
+  {
+    cin: 'JC123456',
+    nomComplete: 'Ahmadi  Soufiane',
+    partiPolitique: 'Indépendant',
+    age: 38,
     electeurs: [ 'OP234567' ]
   },
-  
   {
-    cin: 'MN789012',
-    nomComplete : 'anas',
-    partiPolitique: 'Indépendante',
-    age: 29,
-    electeurs: [ 'CD987654', 'EF456789' ]}
+    cin: 'JC129356',
+    nomComplete: 'Ahmadi  Anas',
+    partiPolitique: 'Pdg',
+    age: 18,
+    electeurs: [ 'OP233067' ]
+  },
 ]
 function  nombreCandidatsParParti(){
-  for(let i = 0 ; i<arr.length;i++){
-    for(let j = 0 ; j < arr.length-1;j++){
-        if (arr[j].electeurs.length < arr[j+1].electeurs.length){
-        let resultat = arr[j+1]
-        arr[j+1]= arr[j]
-         arr[j] = resultat
-        }
+    let obj = {}
+     for(let i = 0 ; i < condidate.length ;i++){
+      if(obj[condidate[i].partiPolitique]=== undefined ) {
+        obj[condidate[i].partiPolitique] = 1
+      } else{
+        obj[condidate[i].partiPolitique]+=1
+    
+      }
     }
-  } 
-  for(let i = 0 ; i < 3 ; i++){
-    console.log(arr[i])
-  }
+    for(key in obj){
+       console.log(`${key}   ${obj[key]}`) 
+    }
 }
-nombreCandidatsParParti(arr)
+
+nombreCandidatsParParti(condidate)
 /*function topTrois(){
     let max1 = arr[0]
     let max2=arr[0]
