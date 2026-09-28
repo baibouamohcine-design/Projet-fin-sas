@@ -50,27 +50,38 @@ const condidate = [
     electeurs: [ 'OP233067' ]
   },
 ]
-function voterPourCandidat() {
+function voterPourCandidat(){
     let verifie = false
-    let cine = prompt("Entré votre CIN : ")
-    for (let i = 0; i < condidate.length; i++) {
-        for (let j = 0; j < condidate[i].electeurs.length; j++)
-            if (condidate[i].electeurs[j] === cine) {
-                console.log("Vous avez déjà voté etvous n'avez pas le droit de modifier votre vote ni de voter à nouveau")
+    let cinElecteurVoter = prompt("Entré votre CIN : ")
+
+    for(let i = 0; i < condidate.length; i++){
+        for(let j = 0; j < condidate[i].electeurs.length; j++){
+            if(condidate[i].electeurs[j] === cinElecteurVoter){
+                console.log("Vous avez déjà voté et vous n'avez pas le droit de modifier votre vote ni de voter à nouveau")
                 verifie = true
                 break
             }
-        if (verifie == true) {
-            continue
-        } else {
-            let cinv = prompt("Entré votre CIN de la Cocndidate pour Voter  : ")
-            if (cinv === condidate[i].cin) {
-
-                condidate[i].electeurs.push(cine)
-            }
+        }
+        if(verifie === true){
+            break
         }
     }
+
+    if(verifie === true){
+        return
+    }
+
+    let cinVoterCandidat = prompt("Entré votre CIN de la Cocndidate pour Voter : ")
+    for(let i = 0; i < condidate.length; i++){
+        if(cinVoterCandidat === condidate[i].cin){
+            condidate[i].electeurs.push(cinElecteurVoter)
+            console.log("Vote enregistré avec succès")
+            return
+        }
+    }
+    console.log("Candidat non trouvé")
 }
+
 voterPourCandidat(condidate)
 
 /*function topTrois(){
